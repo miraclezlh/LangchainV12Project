@@ -9,8 +9,6 @@ from env_utils import DEEPSEEK_API_KEY, DEEPSEEK_BASE_URL
     创建各类LLM大模型
 """
 
-
-
 # 针对每一种模型供应商，不一样，不推荐
 deepseek_llm = ChatDeepSeek(
     api_key=DEEPSEEK_API_KEY,
@@ -18,19 +16,18 @@ deepseek_llm = ChatDeepSeek(
     model="deepseek-chat",
 )
 
-# langchain整合了初始化模型
-# deepseek_llm = init_chat_model(
-#     # api_key=DEEPSEEK_API_KEY,
-#     # base_url=DEEPSEEK_BASE_URL,
-#     api_key="ollama",
-#     base_url="http://localhost:11434",
-#     model='deepseek-r1:8b',
-#     # model_provider='deepseek'
-# )
-
+# Model Class单独创建llm客户端
 ollama_llm = ChatOllama(
     base_url="http://localhost:11434",
     model='qwen3:8b'
+)
+
+# langchain整合了初始化模型，init_chat_model
+ollama_llm_two = init_chat_model(
+    api_key="ollama",
+    base_url="http://localhost:11434",
+    model='qwen3:8b',
+    model_provider='ollama'
 )
 
 # @tool
