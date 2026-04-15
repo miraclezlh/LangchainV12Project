@@ -1,18 +1,10 @@
+from tools.common_tools import get_weather
 from langchain.agents import create_agent
-from langchain_core.tools import tool
-
 from my_llm import ollama_llm, ollama_llm_two
 
-"""创建agent，调用工具回答用户问题"""
-
-
-# 函数定义
-@tool
-def get_weather(city: str) -> str:
-    # 模拟天气查询
-    """获取给定城市的天气。"""
-    return f"{city} 天气晴朗！"
-
+"""
+    创建agent，调用工具回答用户问题
+"""
 
 # 创建Agent
 agent = create_agent(

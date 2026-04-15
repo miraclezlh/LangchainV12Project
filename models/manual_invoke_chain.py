@@ -1,0 +1,31 @@
+from langchain_core.messages import HumanMessage
+
+from my_llm import ollama_llm_two
+from tools.common_tools import get_weather
+
+# chain为HumanMessage-->AIMessage-->ToolMessage-->AIMessage
+messages = [HumanMessage(content="查询北京的天气")]
+
+# 1.给模型，手动绑定工具Tool
+ollama_llm_with_tools = ollama_llm_two.bind_tools([get_weather])
+
+# 2.模型返回要调用的工具，模型不会直接调用工具
+resp = ollama_llm_with_tools.invoke(messages)
+messages.append(resp)
+
+# 3.根据模型返回的调用工具的指令，调用工具
+for tool_call in resp.tool_calls:
+    # print(type(tool_call))
+    # print(tool_call)
+    if tool_call['name'] == "get_weather":
+        city = tool_call['args']["city"]
+        # print(type(city))
+        # print(city)
+        # tool_message = get_weather.invoke(city) # 返回的Tool的返回类型
+        tool_message = get_weather.invoke(tool_call)  # 返回的是ToolMessage结构体
+        messages.append(tool_message)
+        # print(f"工具调用结果: {weather_info}")
+
+result = ollama_llm_with_tools.invoke(messages)
+print(messages)
+print(result)
