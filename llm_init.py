@@ -29,14 +29,3 @@ ollama_llm_two = init_chat_model(
     model='qwen3:8b',
     model_provider='ollama'
 )
-
-# @tool
-# def get_weather(city: str) -> str:
-#     # 函数：返回天气
-#     return f"{city} 天气晴朗!"
-#
-# deepseek_llm.bind_tools("北京的天气怎么样?")
-
-
-
-
