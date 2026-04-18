@@ -1,8 +1,8 @@
-from llm_init import ollama_llm_two
+from llm_init import ollama_llm_qwen
 from tools.common_tools import get_weather
 
 # 1.给模型，手动绑定工具Tool    2.大模型直接绑定Tools
-ollama_llm_with_tools = ollama_llm_two.bind_tools([get_weather])
+ollama_llm_with_tools = ollama_llm_qwen.bind_tools([get_weather])
 
 # 2.模型返回要调用的工具，模型不会直接调用工具
 resp = ollama_llm_with_tools.invoke("查询北京的天气")
