@@ -30,6 +30,13 @@ ollama_llm_qwen = init_chat_model(
     model_provider='ollama'
 )
 
+ollama_llm_qwen3_4b = init_chat_model(
+    api_key="ollama",
+    base_url="http://localhost:11434",
+    model='qwen3:4b',
+    model_provider='ollama'
+)
+
 ollama_llm_gemma = init_chat_model(
     api_key="ollama",
     base_url="http://localhost:11434",
