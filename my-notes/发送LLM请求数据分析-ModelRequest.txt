@@ -1,0 +1,43 @@
+ModelRequest(
+model=ChatOllama(model='qwen3:8b', base_url='http://localhost:11434'), 
+messages=[
+HumanMessage(content='苹果公司今天的股价是多少？最近有什么新闻？', additional_kwargs={}, response_metadata={}, id='c4bf97f5-1a00-44cc-805b-22067bbf54eb')
+], 
+system_message=SystemMessage(content='你是一个助手，你可以查询公司的股价，以及有关公司的新闻搜索。', additional_kwargs={}, response_metadata={}), 
+tool_choice=None, 
+tools=[
+StructuredTool(name='get_stock_price', description='获取指定公司的股票价格信息\n\nArgs:\n    company: 公司名称（如：苹果公司, 微软公司, 谷歌公司）\n    timeframe: 时间范围（today-今日, week-本周, month-本月）',args_schema=<class 'langchain_core.utils.pydantic.get_stock_price'>, func=<function get_stock_price at 0x00000220604BBEC0>), 
+StructuredTool(name='search_news', description='搜索指定公司的财经新闻\n\nArgs:\n    company: 公司名称\nReturn:\n    公司的财经新闻，每个新闻占一行', args_schema=<class 'langchain_core.utils.pydantic.search_news'>, func=<function search_news at 0x0000022061C31A80>)
+], 
+response_format=None, 
+state={'messages': [
+HumanMessage(content='苹果公司今天的股价是多少？最近有什么新闻？', additional_kwargs={}, response_metadata={}, id='c4bf97f5-1a00-44cc-805b-22067bbf54eb')
+]}, 
+runtime=Runtime(context=None, store=None, stream_writer=<function Pregel.stream.<locals>.stream_writer at 0x0000022061C33560>, previous=None, execution_info=ExecutionInfo(checkpoint_id='1f13bb96-c85f-6031-8000-b053d42fca0a', checkpoint_ns='model:fb807038-6348-0cf7-acd9-a834e3b74c9c', task_id='fb807038-6348-0cf7-acd9-a834e3b74c9c', thread_id=None, run_id=None, node_attempt=1, node_first_attempt_time=1776580300.0903068), server_info=None), 
+model_settings={}
+)
+
+
+ModelRequest(
+model=ChatOllama(model='qwen3:8b', base_url='http://localhost:11434'), 
+messages=[
+HumanMessage(content='苹果公司今天的股价是多少？最近有什么新闻？', additional_kwargs={}, response_metadata={}, id='c4bf97f5-1a00-44cc-805b-22067bbf54eb'), 
+AIMessage(content='', additional_kwargs={}, response_metadata={'model': 'qwen3:8b', 'created_at': '2026-04-19T06:32:10.2301017Z', 'done': True, 'done_reason': 'stop', 'total_duration': 30130531900, 'load_duration': 8448973900, 'prompt_eval_count': 271, 'prompt_eval_duration': 886693300, 'eval_count': 215, 'eval_duration': 20625743400, 'logprobs': None, 'model_name': 'qwen3:8b', 'model_provider': 'ollama'}, id='lc_run--019da470-0d3f-77d2-8a3e-346820e7cc65-0', tool_calls=[{'name': 'get_stock_price', 'args': {'company': '苹果公司', 'timeframe': 'today'}, 'id': 'c89f4287-7908-4b4d-a5a9-3673eb05bed2', 'type': 'tool_call'}, {'name': 'search_news', 'args': {'company': '苹果公司'}, 'id': '50d577b0-9642-4a8b-9c6e-83754df9bb02', 'type': 'tool_call'}], invalid_tool_calls=[], usage_metadata={'input_tokens': 271, 'output_tokens': 215, 'total_tokens': 486}), 
+ToolMessage(content='苹果公司 today价格: 185.2美元', name='get_stock_price', id='c58c840f-551b-4891-8022-fd75ffc3b973', tool_call_id='c89f4287-7908-4b4d-a5a9-3673eb05bed2'), 
+ToolMessage(content='苹果发布新款iPhone，股价上涨3%\n苹果与欧盟达成反垄断和解协议\n苹果将在印度扩大生产规模', name='search_news', id='1fb9c901-20be-4759-b9c0-ae33ac9718be', tool_call_id='50d577b0-9642-4a8b-9c6e-83754df9bb02')
+], 
+system_message=SystemMessage(content='你是一个助手，你可以查询公司的股价，以及有关公司的新闻搜索。', additional_kwargs={}, response_metadata={}), 
+tool_choice=None, 
+tools=[
+StructuredTool(name='get_stock_price', description='获取指定公司的股票价格信息\n\nArgs:\n    company: 公司名称（如：苹果公司, 微软公司, 谷歌公司）\n    timeframe: 时间范围（today-今日, week-本周, month-本月）', args_schema=<class 'langchain_core.utils.pydantic.get_stock_price'>, func=<function get_stock_price at 0x00000220604BBEC0>), 
+StructuredTool(name='search_news', description='搜索指定公司的财经新闻\n\nArgs:\n    company: 公司名称\nReturn:\n    公司的财经新闻，每个新闻占一行', args_schema=<class 'langchain_core.utils.pydantic.search_news'>, func=<function search_news at 0x0000022061C31A80>)], 
+response_format=None, 
+state={'messages': [
+HumanMessage(content='苹果公司今天的股价是多少？最近有什么新闻？', additional_kwargs={}, response_metadata={}, id='c4bf97f5-1a00-44cc-805b-22067bbf54eb'), 
+AIMessage(content='', additional_kwargs={}, response_metadata={'model': 'qwen3:8b', 'created_at': '2026-04-19T06:32:10.2301017Z', 'done': True, 'done_reason': 'stop', 'total_duration': 30130531900, 'load_duration': 8448973900, 'prompt_eval_count': 271, 'prompt_eval_duration': 886693300, 'eval_count': 215, 'eval_duration': 20625743400, 'logprobs': None, 'model_name': 'qwen3:8b', 'model_provider': 'ollama'}, id='lc_run--019da470-0d3f-77d2-8a3e-346820e7cc65-0', tool_calls=[{'name': 'get_stock_price', 'args': {'company': '苹果公司', 'timeframe': 'today'}, 'id': 'c89f4287-7908-4b4d-a5a9-3673eb05bed2', 'type': 'tool_call'}, {'name': 'search_news', 'args': {'company': '苹果公司'}, 'id': '50d577b0-9642-4a8b-9c6e-83754df9bb02', 'type': 'tool_call'}], invalid_tool_calls=[], usage_metadata={'input_tokens': 271, 'output_tokens': 215, 'total_tokens': 486}), 
+ToolMessage(content='苹果公司 today价格: 185.2美元', name='get_stock_price', id='c58c840f-551b-4891-8022-fd75ffc3b973', tool_call_id='c89f4287-7908-4b4d-a5a9-3673eb05bed2'), 
+ToolMessage(content='苹果发布新款iPhone，股价上涨3%\n苹果与欧盟达成反垄断和解协议\n苹果将在印度扩大生产规模', name='search_news', id='1fb9c901-20be-4759-b9c0-ae33ac9718be', tool_call_id='50d577b0-9642-4a8b-9c6e-83754df9bb02')
+]}, 
+runtime=Runtime(context=None, store=None, stream_writer=<function Pregel.stream.<locals>.stream_writer at 0x0000022061C33560>, previous=None, execution_info=ExecutionInfo(checkpoint_id='1f13bb97-e7f4-6e3f-8002-e1b894ecf77b', checkpoint_ns='model:cd7d5a70-f701-b56c-cd16-5234e5a9aa80', task_id='cd7d5a70-f701-b56c-cd16-5234e5a9aa80', thread_id=None, run_id=None, node_attempt=1, node_first_attempt_time=1776580330.2460117), server_info=None), 
+model_settings={}
+)
