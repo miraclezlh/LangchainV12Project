@@ -1,6 +1,5 @@
 from langchain.agents import create_agent
 from langchain.agents.middleware import ModelRequest, ModelResponse, wrap_model_call
-from langchain_core.messages import HumanMessage
 
 from llm_init import ollama_llm_qwen, ollama_llm_qwen3_4b
 from tools.common_tools import search_news, get_stock_price
@@ -34,13 +33,15 @@ agent = create_agent(
 )
 
 # agent调用模型，必须是mesages的结构体作为入参
-# 1.json格式
-# response = agent.invoke({"messages": [{"role": "user", "content": "苹果公司今天的股价是多少？最近有什么新闻？"}]})
+# 流式调用
+resp_stream = agent.stream(
+    {"messages": [{"role": "user", "content": "苹果公司今天的股价是多少？最近有什么新闻？"}]},
+    stream_mode="messages"
+)
+print(type(resp_stream))  # agent调用大模型，stream的返回类型为<class 'generator'>
 
-# 2.Message对象形式
-response = agent.invoke({"messages": [
-    HumanMessage(content="苹果公司今天的股价是多少？最近有什么新闻？")
-]})
-print(type(response)) # agent调用大模型，返回类型为dict,<class 'dict'>
-print(response)
-print(response["messages"][-1].content)
+for token, metadata in resp_stream:
+    if token.content:
+        print(token.content, end="", flush=True)
+# print(response)
+# print(response["messages"][-1].content)
