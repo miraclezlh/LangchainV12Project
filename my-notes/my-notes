@@ -1,0 +1,18 @@
+AIMessage   =    assistant
+ToolMessage =    tool
+SystemMessage = system
+HumanMessage = user
+
+（Prompt Engineering提示词工程）
+
+系统提示词System Prompt
+1.身份角色（Identity）
+描述指责，风格，目标
+2.指令说明（Instructions）
+指导如何生成，遵循的规则，应该做什么/不应该做什么
+3.对话示例（Examples）
+提供示例，给LLM参考，输入输出的例子
+4.背景信息（Context）
+
+使用MarkDown，或者xml格式的标签
+
