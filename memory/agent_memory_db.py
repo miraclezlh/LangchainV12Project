@@ -14,6 +14,9 @@ DB_URI = "mysql+pymysql://root:111111@localhost:3306/langchain_db?useSSL=false&u
 
 """
 with 等于 try......catch......finally
+自动释放资源‌：如文件、数据库连接、线程锁等，在 with 代码块结束后自动关闭或释放。
+‌异常安全‌：无论代码块是否抛出异常，都会执行清理操作。
+‌代码简洁‌：替代冗长的 try...finally 结构，提升可读性。
 """
 with PyMySQLSaver.from_conn_string(DB_URI) as checkpointer:
     """

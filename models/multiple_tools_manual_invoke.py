@@ -1,11 +1,11 @@
 from langchain_core.messages import HumanMessage
 
-from llm_init import ollama_llm_two
+from llm_init import ollama_llm_gemma
 from tools.common_tools import get_stock_price, search_news
 
 # 1. 初始化模型并绑定工具
 tools = [get_stock_price, search_news]
-model_with_multiple_tools = ollama_llm_two.bind_tools(tools)
+model_with_multiple_tools = ollama_llm_gemma.bind_tools(tools)
 
 message = []    # 手搓上下文记忆列表
 human_message = HumanMessage(content="苹果公司今天的股价是多少？最近有什么新闻？")
