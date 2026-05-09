@@ -77,7 +77,7 @@ def update_user_info(name:str, hobbies:list, runtime: ToolRuntime)  -> Command:
 # 创建Agent
 agent = create_agent(
     model=ollama_llm_qwen,
-    tools=[get_user_info],
+    tools=[get_user_info,update_user_info],
     # system_prompt="你是一个助手，你可以查询公司的股价，以及有关公司的新闻搜索。",
     # checkpionter是把过往的交互过程，保存在内存，或者DB，Redis
     checkpointer= InMemorySaver(),
@@ -89,7 +89,7 @@ config = {"configurable": {"thread_id": "session_1"}}
 # agent调用模型，必须是mesages的结构体作为入参
 response = agent.invoke({
     "messages": [{"role": "user", "content": "我叫小飞侠，你是谁？"}],
-    "name":"userId001",
+    "name":"小飞侠",
     "hobbies":["football","volleyball"],
     "other_info":{"city":"sh","address":"pan gu road"}
 
@@ -100,10 +100,23 @@ print(response["messages"][-1].content)
 
 print("================")
 
-response_two = agent.invoke({"messages": [{"role": "user", "content": "获取用户的信息"}]}, config=config)
+response_two = agent.invoke({"messages": [{"role": "user", "content": "我叫林海，我的兴趣爱好还有乒乓球，请更新我的信息"}]}, config=config)
 print(response_two["messages"][-1].content)
 
 print("================")
 
 state = agent.get_state(config=config)
 print(state)
+
+print("================")
+
+response_three = agent.invoke({"messages": [{"role": "user", "content": "获取我的信息"}]}, config=config)
+print(response_three["messages"][-1].content)
+
+print("================")
+
+state = agent.get_state(config=config)
+print(state)
+
+
+
