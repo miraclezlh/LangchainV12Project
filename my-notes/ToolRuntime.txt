@@ -1,7 +1,10 @@
-ToolRuntime(state=
-{
+ToolRuntime(
+state={
     'messages':
-    [HumanMessage(content='我叫小飞侠，你是谁？', additional_kwargs={}, response_metadata={}, id='40e8272b-198f-438c-bd34-67411aab65af'), AIMessage(content='<think>\n好的，用户介绍自己叫小飞侠，然后问我是谁。我需要先调用get_user_info函数来获取用户的信息。不过这个函数的参数是runtime，但用户已经提供了名字，可能不需要参数。或者可能函数需要其他参数，但根据工具定义，参数是空的。所以直接调用函数，然后根据返回的信息回答用户。可能用户想了解我的身份，所以函数返回的信息会帮助我回答。比如，如果函数返回我的名字是通义千问，那么我就可以告诉用户我是通义千问，由阿里云开发的大模型。现在先调用函数，再生成回答。\n</think>\n\n', additional_kwargs={}, response_metadata={'model': 'qwen3:8b', 'created_at': '2026-05-07T14:06:23.4891421Z', 'done': True, 'done_reason': 'stop', 'total_duration': 18862218700, 'load_duration': 155604400, 'prompt_eval_count': 146, 'prompt_eval_duration': 361461600, 'eval_count': 159, 'eval_duration': 18343004600, 'logprobs': None, 'model_name': 'qwen3:8b', 'model_provider': 'ollama'}, id='lc_run--019e02c2-8b4d-7a53-89de-030d3d867112-0', tool_calls=[{'name': 'get_user_info', 'args': {'runtime': 'ToolRuntime'}, 'id': '328244de-d1b3-4859-94b6-36bde10377da', 'type': 'tool_call'}], invalid_tool_calls=[], usage_metadata={'input_tokens': 146, 'output_tokens': 159, 'total_tokens': 305})],
+    [
+        HumanMessage(content='我叫小飞侠，你是谁？', additional_kwargs={}, response_metadata={}, id='40e8272b-198f-438c-bd34-67411aab65af'),
+        AIMessage(content='<think>\n好的，用户介绍自己叫小飞侠，然后问我是谁。我需要先调用get_user_info函数来获取用户的信息。不过这个函数的参数是runtime，但用户已经提供了名字，可能不需要参数。或者可能函数需要其他参数，但根据工具定义，参数是空的。所以直接调用函数，然后根据返回的信息回答用户。可能用户想了解我的身份，所以函数返回的信息会帮助我回答。比如，如果函数返回我的名字是通义千问，那么我就可以告诉用户我是通义千问，由阿里云开发的大模型。现在先调用函数，再生成回答。\n</think>\n\n', additional_kwargs={}, response_metadata={'model': 'qwen3:8b', 'created_at': '2026-05-07T14:06:23.4891421Z', 'done': True, 'done_reason': 'stop', 'total_duration': 18862218700, 'load_duration': 155604400, 'prompt_eval_count': 146, 'prompt_eval_duration': 361461600, 'eval_count': 159, 'eval_duration': 18343004600, 'logprobs': None, 'model_name': 'qwen3:8b', 'model_provider': 'ollama'}, id='lc_run--019e02c2-8b4d-7a53-89de-030d3d867112-0', tool_calls=[{'name': 'get_user_info', 'args': {'runtime': 'ToolRuntime'}, 'id': '328244de-d1b3-4859-94b6-36bde10377da', 'type': 'tool_call'}], invalid_tool_calls=[], usage_metadata={'input_tokens': 146, 'output_tokens': 159, 'total_tokens': 305})
+    ],
     'user_id': 'userId001',
     'hobbies': ['football', 'volleyball'],
     'other_info': {'city': 'sh', 'address': 'pan gu road'}
