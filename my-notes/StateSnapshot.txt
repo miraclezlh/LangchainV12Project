@@ -1,0 +1,99 @@
+StateSnapshot(values = {
+	'messages': [
+	  HumanMessage(content = '我叫小飞侠，你是谁？', additional_kwargs = {}, response_metadata = {}, id = '45660851-beec-4e67-8389-e708e42ee104'),
+	  AIMessage(content = '我是通义千问，由通义实验室开发的超大规模语言模型，能够回答问题、创作文字、编程、逻辑推理等。很高兴认识你，小飞侠！有什么问题或需要帮助的吗？', additional_kwargs = {}, response_metadata = {
+		'model': 'qwen3:8b',
+		'created_at': '2026-05-13T06:42:12.7019032Z',
+		'done': True,
+		'done_reason': 'stop',
+		'total_duration': 23534271200,
+		'load_duration': 8815715100,
+		'prompt_eval_count': 210,
+		'prompt_eval_duration': 530118900,
+		'eval_count': 161,
+		'eval_duration': 14039221900,
+		'logprobs': None,
+		'model_name': 'qwen3:8b',
+		'model_provider': 'ollama'
+	}, id = 'lc_run--019e2011-f869-7913-965a-6542f3776e58-0', tool_calls = [], invalid_tool_calls = [], usage_metadata = {
+		'input_tokens': 210,
+		'output_tokens': 161,
+		'total_tokens': 371
+	}),
+	  HumanMessage(content = '我的名字叫什么？我的兴趣爱好还有乒乓球，请更新我的信息', additional_kwargs = {}, response_metadata = {}, id = 'da2e9bc7-e18c-4f18-bfd0-c107fed05c28'),
+	  AIMessage(content = '', additional_kwargs = {}, response_metadata = {
+		'model': 'qwen3:8b',
+		'created_at': '2026-05-13T06:42:53.5174607Z',
+		'done': True,
+		'done_reason': 'stop',
+		'total_duration': 40772616800,
+		'load_duration': 262514200,
+		'prompt_eval_count': 280,
+		'prompt_eval_duration': 395688700,
+		'eval_count': 460,
+		'eval_duration': 39999933000,
+		'logprobs': None,
+		'model_name': 'qwen3:8b',
+		'model_provider': 'ollama'
+	}, id = 'lc_run--019e2012-5487-7243-9d8a-6ea7989e22ff-0', tool_calls = [{
+		'name': 'update_user_info',
+		'args': {
+			'name': '小飞侠',
+			'hobbies': ['乒乓球']
+		},
+		'id': 'a152dc33-faef-49d9-896e-e3590d2fc2a4',
+		'type': 'tool_call'
+	}], invalid_tool_calls = [], usage_metadata = {
+		'input_tokens': 280,
+		'output_tokens': 460,
+		'total_tokens': 740
+	}),
+	  ToolMessage(content = "用户姓名:小飞侠,兴趣:['乒乓球']", name = 'update_user_info', id = '8c8351a1-ce10-4071-8fdb-4cfec9eea46b', tool_call_id = 'a152dc33-faef-49d9-896e-e3590d2fc2a4'),
+	  AIMessage(content = '您的信息已成功更新：  \n姓名：小飞侠  \n兴趣爱好：乒乓球  \n\n还有其他需要帮助的吗？', additional_kwargs = {}, response_metadata = {
+		'model': 'qwen3:8b',
+		'created_at': '2026-05-13T06:43:05.7750316Z',
+		'done': True,
+		'done_reason': 'stop',
+		'total_duration': 12241194100,
+		'load_duration': 245719900,
+		'prompt_eval_count': 330,
+		'prompt_eval_duration': 374873800,
+		'eval_count': 131,
+		'eval_duration': 11486517200,
+		'logprobs': None,
+		'model_name': 'qwen3:8b',
+		'model_provider': 'ollama'
+	}, id = 'lc_run--019e2012-f3dc-7f22-b659-7454ba295dd3-0', tool_calls = [], invalid_tool_calls = [], usage_metadata = {
+		'input_tokens': 330,
+		'output_tokens': 131,
+		'total_tokens': 461
+	})],
+	'name': '小飞侠',
+	'hobbies': ['乒乓球'],
+	'other_info': {
+		'city': 'sh',
+		'address': 'pan gu road'
+	}
+}, next = (), config = {
+	'configurable': {
+		'thread_id': 'session_1',
+		'checkpoint_ns': '',
+		'checkpoint_id': '1f14e96f-f238-62ac-8006-f77d9d9a7276'
+	}
+}, metadata = {
+	'source': 'loop',
+	'step': 6,
+	'parents': {},
+	'ls_integration': 'langchain_create_agent'
+}, created_at = '2026-05-13T06:43:05.777396+00:00', parent_config = {
+	'configurable': {
+		'thread_id': 'session_1',
+		'checkpoint_ns': '',
+		'checkpoint_id': '1f14e96f-7d64-6f92-8005-371e05c89758'
+	}
+}, tasks = (), interrupts = ())
+
+
+
+
+

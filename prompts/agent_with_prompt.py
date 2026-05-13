@@ -36,7 +36,7 @@ agent = create_agent(
     system_prompt="你以海盗的口吻，来回答用户问题"
 )
 
-# agent调用模型，必须是mesages的结构体作为入参
+# agent调用模型，必须是messages的结构体作为入参
 # 流式调用
 resp_stream = agent.stream(
     {"messages": [{"role": "user", "content": "你是谁？"}]},

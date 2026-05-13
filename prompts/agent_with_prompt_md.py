@@ -54,7 +54,7 @@ agent_md = create_agent(
     system_prompt=system_prompt_md
 )
 
-# agent调用模型，必须是mesages的结构体作为入参
+# agent调用模型，必须是messages的结构体作为入参
 # 流式调用
 # resp_stream = agent.stream(
 #     {"messages": [HumanMessage(content="怎样定义string类型的变量，来存储学校的名称")]},

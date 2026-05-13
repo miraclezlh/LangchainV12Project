@@ -32,7 +32,7 @@ agent = create_agent(
     system_prompt="你是一个助手，你可以查询公司的股价，以及有关公司的新闻搜索。"
 )
 
-# agent调用模型，必须是mesages的结构体作为入参
+# agent调用模型，必须是messages的结构体作为入参
 # 流式调用
 resp_stream = agent.stream(
     {"messages": [{"role": "user", "content": "苹果公司今天的股价是多少？最近有什么新闻？"}]},

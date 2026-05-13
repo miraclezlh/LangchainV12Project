@@ -21,7 +21,7 @@ agent = create_agent(
 
 config = {"configurable": {"thread_id": "session_1"}}
 
-# agent调用模型，必须是mesages的结构体作为入参
+# agent调用模型，必须是messages的结构体作为入参
 response = agent.invoke({"messages": [{"role": "user", "content": "我叫小飞侠，你是谁？"}]}, config=config)
 print(type(response))
 print(response)

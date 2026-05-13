@@ -25,7 +25,7 @@ class CustomAgentState(AgentState):
 @tool
 def get_user_info(runtime: ToolRuntime)  -> str:
     """
-    获取用户的信息
+    获取用户信息
 
     Args:
         runtime: ToolRuntime
@@ -40,22 +40,27 @@ def get_user_info(runtime: ToolRuntime)  -> str:
 @tool
 def update_user_info(name:str, hobbies:list, runtime: ToolRuntime)  -> Command:
     """
-    更新用户的信息
+    更新用户信息
 
     Args:
-        runtime: ToolRuntime
+        :param runtime: ToolRuntime
+        :param name: str
+        :param hobbies: str
     """
+
+    #缺少参数，返回信息
+    update={
+        "messages":[
+            ToolMessage(
+                content="缺少用户名或爱好",
+                tool_call_id = runtime.tool_call_id
+            )
+        ]
+    }
 
     if not name or not hobbies:
         return Command(
-            update={
-                "messages":[
-                    ToolMessage(
-                        content="缺少用户名或爱好",
-                        tool_call_id = runtime.tool_call_id
-                    )
-                ]
-            }
+            update=update
         )
 
     update={
@@ -63,7 +68,7 @@ def update_user_info(name:str, hobbies:list, runtime: ToolRuntime)  -> Command:
         "hobbies":hobbies,
         "messages":[
             ToolMessage(
-                content=f"用户姓名:{name},兴趣:{hobbies}",
+                content=f"用户姓名:{name}的爱好更新为:{hobbies}",
                 tool_call_id = runtime.tool_call_id
             )
         ]
@@ -75,18 +80,18 @@ def update_user_info(name:str, hobbies:list, runtime: ToolRuntime)  -> Command:
 
 
 # 创建Agent
+# checkpointer是把过往的交互过程，保存在内存，或者DB，Redis
 agent = create_agent(
     model=ollama_llm_qwen,
     tools=[get_user_info,update_user_info],
-    # system_prompt="你是一个助手，你可以查询公司的股价，以及有关公司的新闻搜索。",
-    # checkpionter是把过往的交互过程，保存在内存，或者DB，Redis
     checkpointer= InMemorySaver(),
-    state_schema= CustomAgentState
+    state_schema= CustomAgentState,
+    system_prompt="你是一个用户信息管理助手，如果用户要求更新信息，请调用update_user_info"
 )
 
 config = {"configurable": {"thread_id": "session_1"}}
 
-# agent调用模型，必须是mesages的结构体作为入参
+# agent调用模型，必须是messages的结构体作为入参
 response = agent.invoke({
     "messages": [{"role": "user", "content": "我叫小飞侠，你是谁？"}],
     "name":"小飞侠",
@@ -97,22 +102,19 @@ response = agent.invoke({
 print(type(response))
 print(response)
 print(response["messages"][-1].content)
-
 print("================")
 
-response_two = agent.invoke({"messages": [{"role": "user", "content": "我叫林海，我的兴趣爱好还有乒乓球，请更新我的信息"}]}, config=config)
+response_two = agent.invoke({"messages": [{"role": "user", "content": "我的名字叫什么？我的兴趣爱好还有乒乓球，请追加爱好，更新用户信息"}]}, config=config)
 print(response_two["messages"][-1].content)
-
 print("================")
 
+#状态快照
 state = agent.get_state(config=config)
 print(state)
-
 print("================")
 
-response_three = agent.invoke({"messages": [{"role": "user", "content": "获取我的信息"}]}, config=config)
+response_three = agent.invoke({"messages": [{"role": "user", "content": "获取我的信息，用中文展示"}]}, config=config)
 print(response_three["messages"][-1].content)
-
 print("================")
 
 state = agent.get_state(config=config)

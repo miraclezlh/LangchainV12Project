@@ -33,7 +33,7 @@ agent = create_agent(
     system_prompt="你是一个图片识别助手，请你详细描述图片资源。"
 )
 
-# agent调用模型，必须是mesages的结构体作为入参
+# agent调用模型，必须是messages的结构体作为入参
 # 1.json格式
 resp_stream = agent.stream(HumanMessage([
          {"type":"text","content":"描述以下图片的内容"},
