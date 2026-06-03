@@ -35,17 +35,24 @@ def get_user_info(runtime:ToolRuntime) -> str | None:
     :return:
     """
 
+    global user_id
     print("runtime:",runtime)
     print("================")
 
     # 获取store
     store = runtime.store
 
+    # 获取store
+    context = runtime.context
+
     print("runtime.store:",store)
+    print("runtime.context:",context)
     print("================")
 
+    user_id = "user_001"
     # 获取user_id
-    user_id = "user_123"
+    if context:
+        user_id = context["user_id"]
 
     # 从长期记忆中获取用户信息
     user_data = store.get(("users",), user_id)
@@ -74,12 +81,14 @@ config1 = {"configurable": {"thread_id": "session_1"}}
 config2 = {"configurable": {"thread_id": "session_2"}}
 
 # agent调用模型，必须是messages的结构体作为入参
-response = agent.invoke({"messages": [{"role": "user", "content": "从长期记忆中，获取用户信息"}]}, config=config1)
+response = agent.invoke({"messages": [{"role": "user", "content": "从长期记忆中，获取用户信息"}]},config=config1)
 print(type(response))
 print(response)
 print(response["messages"][-1].content)
 
 print("================")
 
-response_two = agent.invoke({"messages": [{"role": "user", "content": "从长期记忆中，获取用户信息"}]}, config=config2)
+response_two = agent.invoke({"messages": [{"role": "user", "content": "从长期记忆中，获取用户信息"}]},
+                            context={"user_id":"user_456"},
+                            config=config2)
 print(response_two["messages"][-1].content)

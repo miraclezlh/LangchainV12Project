@@ -52,7 +52,8 @@ response = agent.invoke({"messages": [{"role": "user", "content": "从长期记�
 }
 
 
-二.调用工具的ToolRuntime
+二.ToolRuntime
+2.1调用工具的ToolRuntime(无传递context)
 ToolRuntime(state = {
 	'messages': [HumanMessage(content = '从长期记忆中，获取用户信息', additional_kwargs = {}, response_metadata = {}, id = 'ac962766-3a48-4f0b-b567-3dc800e7bf65'),
 				 AIMessage(content = '<think>\n好的，用户需要从长期记忆中获取信息。我需要调用get_user_info这个函数。不过看工具描述里的参数，这个函数好像不需要任何参数，直接调用就行。那我应该生成一个工具调用，调用get_user_info，参数为空对象。然后等待函数返回结果，再根据结果回复用户。注意要严格按照格式，用XML标签包裹工具调用。确保JSON结构正确，不要有额外的参数。嗯，应该没问题。\n</think>\n\n', additional_kwargs = {}, response_metadata = {
@@ -121,3 +122,77 @@ ToolRuntime(state = {
 			at 0x0000025BC67D4050 > )
 	}
 }, stream_writer = < function Pregel.stream. < locals > .stream_writer at 0x0000025BC67D09A0 > , tool_call_id = 'b6a8f2a2-b9d2-417f-adc7-c8cd44878920', store = < langgraph.store.memory.InMemoryStore object at 0x0000025BC3AD5220 > , execution_info = ExecutionInfo(checkpoint_id = '1f15f12d-b8f7-67d3-8001-ca5e6204d82d', checkpoint_ns = 'tools:86902b4e-f83c-c8a2-3d8b-e35e8f6565c2', task_id = '86902b4e-f83c-c8a2-3d8b-e35e8f6565c2', thread_id = 'session_1', run_id = None, node_attempt = 1, node_first_attempt_time = 1780467002.290029), server_info = None)
+
+2.2调用工具的ToolRuntime(有传递context)
+ToolRuntime(state = {
+	'messages': [HumanMessage(content = '从长期记忆中，获取用户信息', additional_kwargs = {}, response_metadata = {}, id = 'd8492cda-b77a-4795-b805-95477c5b87bb'),
+				 AIMessage(content = '<think>\n好的，用户需要从长期记忆中获取他们的信息。我需要调用get_user_info这个函数来完成任务。首先，检查工具中的函数定义，确认该函数不需要任何参数，直接从长期记忆中检索用户信息。接下来，生成相应的工具调用，使用正确的JSON格式，并确保没有遗漏必要的参数。由于函数没有 required 参数，所以 arguments 可以是空对象。最后，确保工具调用的格式正确，被XML标签包裹。现在，调用该函数即可获取用户信息。\n</think>\n\n', additional_kwargs = {}, response_metadata = {
+		'model': 'qwen3:8b',
+		'created_at': '2026-06-03T07:41:48.3154844Z',
+		'done': True,
+		'done_reason': 'stop',
+		'total_duration': 15082804800,
+		'load_duration': 207147000,
+		'prompt_eval_count': 163,
+		'prompt_eval_duration': 136184000,
+		'eval_count': 130,
+		'eval_duration': 14735919500,
+		'logprobs': None,
+		'model_name': 'qwen3:8b',
+		'model_provider': 'ollama'
+	}, id = 'lc_run--019e8c6e-34af-7811-ba45-c99f9c46b275-0', tool_calls = [{
+		'name': 'get_user_info',
+		'args': {},
+		'id': '6e78e3ab-74c4-40d5-bb0d-67db5b978829',
+		'type': 'tool_call'
+	}], invalid_tool_calls = [], usage_metadata = {
+		'input_tokens': 163,
+		'output_tokens': 130,
+		'total_tokens': 293
+	})]
+}, context = {
+	'user_id': 'user_456'
+}, config = {
+	'tags': [],
+	'metadata': {
+		'ls_integration': 'langchain_create_agent',
+		'thread_id': 'session_1',
+		'langgraph_step': 2,
+		'langgraph_node': 'tools',
+		'langgraph_triggers': ('__pregel_push', ),
+		'langgraph_path': ('__pregel_push', 0, False),
+		'langgraph_checkpoint_ns': 'tools:b718018b-5f30-2315-c816-ebef64a4daff',
+		'checkpoint_ns': 'tools:b718018b-5f30-2315-c816-ebef64a4daff'
+	},
+	'callbacks': < langchain_core.callbacks.manager.CallbackManager object at 0x00000230F8445C50 > ,
+	'recursion_limit': 9999,
+	'configurable': {
+		'thread_id': 'session_2',
+		'__pregel_runtime': Runtime(context = {
+			'user_id': 'user_456'
+		}, store = < langgraph.store.memory.InMemoryStore object at 0x00000230F56E51D0 > , stream_writer = < function Pregel.stream. < locals > .stream_writer at 0x00000230F8430C20 > , previous = None, execution_info = ExecutionInfo(checkpoint_id = '1f15f1fa-d692-6dd4-8001-d41604b6c770', checkpoint_ns = 'tools:b718018b-5f30-2315-c816-ebef64a4daff', task_id = 'b718018b-5f30-2315-c816-ebef64a4daff', thread_id = 'session_2', run_id = None, node_attempt = 1, node_first_attempt_time = 1780472508.31745), server_info = None),
+		'__pregel_replay_state': None,
+		'__pregel_task_id': 'b718018b-5f30-2315-c816-ebef64a4daff',
+		'__pregel_send': < built - in method extend of collections.deque object at 0x00000230F6F5F3D0 > ,
+		'__pregel_read': functools.partial( < function local_read at 0x00000230F5AC8EA0 > , PregelScratchpad(step = 2, stop = 9999, call_counter = < langgraph.pregel._algo.LazyAtomicCounter object at 0x00000230F70CF610 > , interrupt_counter = < langgraph.pregel._algo.LazyAtomicCounter object at 0x00000230F715BA00 > , get_null_resume = < function _scratchpad. < locals > .get_null_resume at 0x00000230F8431760 > , resume = [], subgraph_counter = < langgraph.pregel._algo.LazyAtomicCounter object at 0x00000230F73EBE50 > ), {
+			'messages': < langgraph.channels.binop.BinaryOperatorAggregate object at 0x00000230F7402E40 > ,
+			'jump_to': < langgraph.channels.ephemeral_value.EphemeralValue object at 0x00000230F7401040 > ,
+			'structured_response': < langgraph.channels.last_value.LastValue object at 0x00000230F7400CC0 > ,
+			'__start__': < langgraph.channels.ephemeral_value.EphemeralValue object at 0x00000230F7401200 > ,
+			'__pregel_tasks': < langgraph.channels.topic.Topic object at 0x00000230F7402940 > ,
+			'branch:to:model': < langgraph.channels.ephemeral_value.EphemeralValue object at 0x00000230F74009C0 > ,
+			'branch:to:tools': < langgraph.channels.ephemeral_value.EphemeralValue object at 0x00000230F7401140 >
+		}, {}, PregelTaskWrites(path = ('__pregel_push', 0, False), name = 'tools', writes = deque([]), triggers = ('__pregel_push', ))),
+		'__pregel_checkpointer': None,
+		'checkpoint_map': {
+			'': '1f15f1fa-d692-6dd4-8001-d41604b6c770'
+		},
+		'checkpoint_id': None,
+		'checkpoint_ns': 'tools:b718018b-5f30-2315-c816-ebef64a4daff',
+		'__pregel_scratchpad': PregelScratchpad(step = 2, stop = 9999, call_counter = < langgraph.pregel._algo.LazyAtomicCounter object at 0x00000230F70CF610 > , interrupt_counter = < langgraph.pregel._algo.LazyAtomicCounter object at 0x00000230F715BA00 > , get_null_resume = < function _scratchpad. < locals > .get_null_resume at 0x00000230F8431760 > , resume = [], subgraph_counter = < langgraph.pregel._algo.LazyAtomicCounter object at 0x00000230F73EBE50 > ),
+		'__pregel_call': functools.partial( < function _call at 0x00000230F5AE36A0 > , < weakref at 0x00000230F842DDF0; to 'langgraph.types.PregelExecutableTask'
+			at 0x00000230F83FF380 > , retry_policy = None, futures = < weakref at 0x00000230F842E160; to 'langgraph.pregel._runner.FuturesDict'
+			at 0x00000230F842DFE0 > , schedule_task = < bound method SyncPregelLoop.accept_push of < langgraph.pregel._loop.SyncPregelLoop object at 0x00000230F73279D0 >> , submit = < weakref at 0x00000230F72C6950; to 'langgraph.pregel._executor.BackgroundExecutor'
+			at 0x00000230F8440410 > )
+	}
+}, stream_writer = < function Pregel.stream. < locals > .stream_writer at 0x00000230F8430C20 > , tool_call_id = '6e78e3ab-74c4-40d5-bb0d-67db5b978829', store = < langgraph.store.memory.InMemoryStore object at 0x00000230F56E51D0 > , execution_info = ExecutionInfo(checkpoint_id = '1f15f1fa-d692-6dd4-8001-d41604b6c770', checkpoint_ns = 'tools:b718018b-5f30-2315-c816-ebef64a4daff', task_id = 'b718018b-5f30-2315-c816-ebef64a4daff', thread_id = 'session_2', run_id = None, node_attempt = 1, node_first_attempt_time = 1780472508.31745), server_info = None)
