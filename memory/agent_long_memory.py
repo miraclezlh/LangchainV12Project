@@ -10,8 +10,6 @@ from llm_init import ollama_llm_qwen
 一次会话：包含多次对话，HumanMessage
 checkpointer可以实现短期记忆
 
-
-
 """
 
 
@@ -37,8 +35,14 @@ def get_user_info(runtime:ToolRuntime) -> str | None:
     :return:
     """
 
+    print("runtime:",runtime)
+    print("================")
+
     # 获取store
     store = runtime.store
+
+    print("runtime.store:",store)
+    print("================")
 
     # 获取user_id
     user_id = "user_123"
@@ -48,6 +52,8 @@ def get_user_info(runtime:ToolRuntime) -> str | None:
 
     if user_data:
         print("user_data:",user_data.value)
+        print("================")
+
         value = user_data.value
         return f"姓名:{value['name']}, 年龄:{value['age']}, 城市:{value['city']}, 爱好:{value['hobby']}"
     else:
@@ -60,8 +66,8 @@ agent = create_agent(
     tools=[get_user_info],
     system_prompt="你是一个用户信息查询助手，你可以调用get_user_info查询用户的信息",
     # checkpionter是把过往的交互过程，保存在内存，或者DB，Redis
-    checkpointer=InMemorySaver(),# 短期记忆存储
-    store=store
+    # checkpointer=InMemorySaver(),# 短期记忆存储
+    store=store # 长期记忆存储
 )
 
 config1 = {"configurable": {"thread_id": "session_1"}}
