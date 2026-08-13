@@ -2,7 +2,7 @@ import os
 
 from dotenv import load_dotenv
 
-# 从env加载环境变量,override=True,确保.env文件优先
+# 优先从env文件加载环境变量,override=True,确保.env文件优先
 load_dotenv(override=True)
 
 # 从配置文件读取信息

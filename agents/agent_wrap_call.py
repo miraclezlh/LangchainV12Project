@@ -27,9 +27,13 @@ def dynamic_model_selection(request: ModelRequest, handler) -> ModelResponse:
 
 # 创建Agent
 agent = create_agent(
+    # 模型
     model=ollama_llm_qwen,
+    # 可使用的工具列表
     tools=[get_stock_price, search_news],
+    # 中间件
     middleware=[dynamic_model_selection],
+    # 系统提示词
     system_prompt="你是一个助手，你可以查询公司的股价，以及有关公司的新闻搜索。"
 )
 
@@ -41,6 +45,6 @@ agent = create_agent(
 response = agent.invoke({"messages": [
     HumanMessage(content="苹果公司今天的股价是多少？最近有什么新闻？")
 ]})
-print(type(response)) # agent调用大模型，返回类型为dict,<class 'dict'>
+print(type(response)) # agent调用大模型，返回类型为字典类型，dict,<class 'dict'>
 print(response)
 print(response["messages"][-1].content)
