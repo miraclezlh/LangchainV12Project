@@ -1,5 +1,3 @@
-from pydantic_core.core_schema import json_schema
-
 from llm_init import ollama_llm_qwen
 
 """
@@ -17,18 +15,28 @@ conversations = [
 
 # 定义结构化输出 JsonSchema
 json_schema_def = {
-    "title":"MovieInfo",
-    "description":"电影信息",
-    "type":"object",
-    "properties":{
-        "title":{"type":"string","description":"电影的标题"},
-        "year":{"type":"integer","description":"电影的年份"},
-        "director":{"type":"string","description":"电影的导演"},
-        "rating":{"type":"number","description":"电影的评分"}
+    "title": "MovieInfo",
+    "description": "电影信息",
+    "type": "object",
+    "properties": {
+        "title": {"type": "string", "description": "电影的标题"},
+        "year": {"type": "integer", "description": "电影的年份"},
+        "director": {"type": "string", "description": "电影的导演"},
+        "rating": {"type": "number", "description": "电影的评分"},
+        "cast": {
+            "description": "电影演员列表",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "name": {"type": "string", "description": "演员姓名"},
+                    "role": {"type": "string", "description": "演员角色"}
+                },
+                "required": ["name", "role"]
+            },
+        }
     },
-    "required":["title","year","director","rating"]
-
-
+    "required": ["title", "year", "director", "rating"]
 }
 
 # 3.让大模型绑定JsonSchema
@@ -36,6 +44,3 @@ ollama_llm_with_structured = ollama_llm_qwen.with_structured_output(json_schema_
 resp = ollama_llm_with_structured.invoke(conversations)
 print(type(resp))
 print(resp)
-
-
-
