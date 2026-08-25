@@ -3,6 +3,8 @@ from langchain_core.messages import HumanMessage
 from llm_init import ollama_llm_qwen
 from tools.common_tools import get_weather
 
+# 这个例子是演示，完整的手动调用模型的过程
+
 # chain为HumanMessage-->AIMessage-->ToolMessage-->AIMessage
 messages = [HumanMessage(content="查询北京的天气")]
 
@@ -17,7 +19,8 @@ print(resp)
 # second-->发送问题给大模型
 messages.append(resp)
 
-# 3.根据模型返回的调用工具的指令，调用工具
+# 3.tool_calls是list，存放工具的dict信息。根据模型返回的调用工具的指令，调用工具
+# XXXMessage,用"."来获取字段信息，列表用循环来获取各个值，用[]来获取dict的键值对信息
 for tool_call in resp.tool_calls:
     # print(type(tool_call))
     # print(tool_call)
@@ -26,7 +29,7 @@ for tool_call in resp.tool_calls:
         print(type(city))
         print(city)
         # tool_message = get_weather.invoke(city) # 返回的Tool的返回类型
-        tool_message = get_weather.invoke(tool_call)  # 返回的是ToolMessage结构体
+        tool_message = get_weather.invoke(tool_call)  # 工具调用，返回的是ToolMessage结构体
         print(type(tool_message))
         print(tool_message)
         messages.append(tool_message)
